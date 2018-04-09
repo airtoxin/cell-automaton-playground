@@ -14,6 +14,8 @@ ReactDom.render(
 );
 
 const targetCanvas = document.getElementById("canvas") as HTMLCanvasElement;
+targetCanvas.width = document.body.clientWidth;
+targetCanvas.height = document.body.clientHeight;
 
 const cells = initialize(100, 100);
 
