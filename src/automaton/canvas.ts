@@ -18,6 +18,10 @@ export const draw = (options: DrawOptions): void => {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
+  // Clear canvas
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Draw cells
   options.cells.forEach((row, y) =>
     row.forEach((cell, x) => {
       if (cell) {
@@ -29,14 +33,14 @@ export const draw = (options: DrawOptions): void => {
           0,
           Math.PI * 2
         );
-        ctx.strokeStyle = "rgb(0, 64, 64)";
+        ctx.strokeStyle = "rgb(0, 192, 192)";
         ctx.stroke();
-        ctx.fillStyle = "rgba(0, 32, 32)";
+        ctx.fillStyle = "rgba(0, 64, 64)";
         ctx.fill();
       }
     })
   );
-
+  // Fill up targetCanvas by cells pattern
   targetCtx.rect(0, 0, options.target.width, options.target.height);
   targetCtx.fillStyle = targetCtx.createPattern(canvas, "repeat");
 

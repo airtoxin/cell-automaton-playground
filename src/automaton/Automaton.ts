@@ -48,9 +48,10 @@ export const getNext = (cells: number[][], strategy: Strategy): number[][] => {
 export const GameOfLifeStrategy: Strategy = neighborCells => {
   const count = neighborCells
     .filter((_, i) => i !== 4) // omit center cell
-    .reduce((a, x) => (a ? a : 0) + (x ? 1 : 0), 0);
+    .map(x => x ? x : 0)
+    .reduce((a, x) => a + x, 0);
 
-  if (neighborCells[4]) {
+  if (neighborCells[4] === 1) {
     return count === 2 || count === 3 ? 1 : 0;
   } else {
     return count === 3 ? 1 : 0;
