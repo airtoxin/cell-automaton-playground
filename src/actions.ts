@@ -8,3 +8,7 @@ export const setRandomBitCells = () => createAction(state => {
 export const setNextCells = () => createAction(state => {
   state.cells = getNext(state.cells, state.strategy);
 });
+
+export const setCellSize = (size: number) => createAction(state => {
+  state.cell.size = size <= 0 ? 1 : size;
+});
