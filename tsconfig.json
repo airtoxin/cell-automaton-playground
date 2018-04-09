@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "jsx": "react",
+    "module": "es6",
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "noErrorTruncation": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "strict": true,
+    "target": "es2017"
+  }
+}
