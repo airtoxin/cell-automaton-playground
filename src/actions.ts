@@ -1,5 +1,5 @@
 import {createAction} from "./store";
-import {getNext, initialize} from "./automaton/Automaton";
+import {getNext, initialize} from "./models/Automaton";
 
 export const setRandomBitCells = () => createAction(state => {
   state.cells = initialize(state.boardSize.width, state.boardSize.height);

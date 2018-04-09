@@ -1,5 +1,5 @@
-import {initialize, Strategy} from "./automaton/Automaton";
-import * as strategies from "./automaton/strategies";
+import {initialize, Strategy} from "./models/Automaton";
+import * as strategies from "./models/strategies";
 
 export interface State {
   boardSize: {

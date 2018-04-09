@@ -6,21 +6,21 @@ export interface DrawOptions {
   cells: number[][];
 }
 
-const canvas = document.createElement("canvas");
+const index = document.createElement("canvas");
 
 export const draw = (options: DrawOptions): void => {
   const targetCtx = options.target.getContext("2d");
   if (!targetCtx) return;
 
-  canvas.width = options.width;
-  canvas.height = options.height;
+  index.width = options.width;
+  index.height = options.height;
 
-  const ctx = canvas.getContext("2d");
+  const ctx = index.getContext("2d");
   if (!ctx) return;
 
   // Clear canvas
   ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, index.width, index.height);
   // Draw cells
   options.cells.forEach((row, y) =>
     row.forEach((cell, x) => {
@@ -42,7 +42,7 @@ export const draw = (options: DrawOptions): void => {
   );
   // Fill up targetCanvas by cells pattern
   targetCtx.rect(0, 0, options.target.width, options.target.height);
-  targetCtx.fillStyle = targetCtx.createPattern(canvas, "repeat");
+  targetCtx.fillStyle = targetCtx.createPattern(index, "repeat");
 
   targetCtx.fill();
 };

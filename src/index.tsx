@@ -3,7 +3,7 @@ import * as ReactDom from "react-dom";
 import { Provider } from "react-redux";
 import { App } from "./App";
 import {store} from "./store";
-import {draw} from "./automaton/canvas";
+import {draw} from "./canvas";
 import {setNextCells, setRandomBitCells} from "./actions";
 
 ReactDom.render(
