@@ -18,19 +18,27 @@ const targetCanvas = document.getElementById("canvas") as HTMLCanvasElement;
 targetCanvas.width = document.body.clientWidth;
 targetCanvas.height = document.body.clientHeight;
 
-let cells = initialize(60, 60);
+const CELL_SIZE = 10;
+const PATTERN_WIDTH = 60;
+const PATTERN_HEIGHT = 60;
+
+let cells = initialize(PATTERN_WIDTH, PATTERN_HEIGHT);
 
 const d = () => {
   draw({
-    width: 600,
-    height: 600,
-    cellSize: 10,
+    width: CELL_SIZE * PATTERN_WIDTH,
+    height: CELL_SIZE * PATTERN_HEIGHT,
+    cellSize: CELL_SIZE,
     target: targetCanvas,
     cells
   });
-  cells = getNext(cells, strategies.VoteStrategy);
+  cells = getNext(cells, strategies.DazzleStrategy);
 
   requestAnimationFrame(d);
 };
 
 d();
+
+window.onclick = () => {
+  cells = initialize(PATTERN_WIDTH, PATTERN_HEIGHT);
+}
