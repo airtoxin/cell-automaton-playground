@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { App } from "./App";
 import {store} from "./store";
 import {draw} from "./automaton/canvas";
-import {initialize} from "./automaton/Automaton";
+import {initialize, getNext, GameOfLifeStrategy} from "./automaton/Automaton";
 
 ReactDom.render(
   <Provider store={store}>
@@ -17,12 +17,19 @@ const targetCanvas = document.getElementById("canvas") as HTMLCanvasElement;
 targetCanvas.width = document.body.clientWidth;
 targetCanvas.height = document.body.clientHeight;
 
-const cells = initialize(100, 100);
+let cells = initialize(60, 60);
 
-draw({
-  width: 100,
-  height: 100,
-  cellSize: 5,
-  target: targetCanvas,
-  cells
-});
+const d = () => {
+  draw({
+    width: 300,
+    height: 300,
+    cellSize: 5,
+    target: targetCanvas,
+    cells
+  });
+  cells = getNext(cells, GameOfLifeStrategy);
+
+  requestAnimationFrame(d);
+};
+
+d();
