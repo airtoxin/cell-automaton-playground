@@ -6,18 +6,20 @@ export const initialize = (width: number, height: number): number[][] => {
   );
 }
 
+export type Neighbors = [
+  number|undefined,
+  number|undefined,
+  number|undefined,
+  number|undefined,
+  number,
+  number|undefined,
+  number|undefined,
+  number|undefined,
+  number|undefined
+  ];
+
 export interface Strategy {
-  (neighbors: [
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined,
-    number|undefined
-  ]): number;
+  (neighbors: Neighbors): number;
 }
 
 export const getNext = (cells: number[][], strategy: Strategy): number[][] => {
@@ -44,16 +46,3 @@ export const getNext = (cells: number[][], strategy: Strategy): number[][] => {
     })
   );
 }
-
-export const GameOfLifeStrategy: Strategy = neighborCells => {
-  const count = neighborCells
-    .filter((_, i) => i !== 4) // omit center cell
-    .map(x => x ? x : 0)
-    .reduce((a, x) => a + x, 0);
-
-  if (neighborCells[4] === 1) {
-    return count === 2 || count === 3 ? 1 : 0;
-  } else {
-    return count === 3 ? 1 : 0;
-  }
-};
