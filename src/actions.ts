@@ -21,6 +21,10 @@ export const setBoardSize = ({ width, height }: { width?: number, height?: numbe
   if (height) state.boardSize.height = height;
 });
 
-export const setStrategy = (strategyName: string) => createAction(state => {
-  if ((strategies as any)[strategyName]) state.strategy = (strategies as any)[strategyName];
+export const setStrategy = (name: string) => createAction(state => {
+  if (name === "GameOfLifeStrategy") state.strategy = strategies.GameOfLifeStrategy;
+  if (name === "VoteStrategy") state.strategy = strategies.VoteStrategy;
+  if (name === "NeonStrategy") state.strategy = strategies.NeonStrategy;
+  if (name === "DazzleStrategy") state.strategy = strategies.DazzleStrategy;
+  if (name === "WaveStrategy") state.strategy = strategies.WaveStrategy;
 });

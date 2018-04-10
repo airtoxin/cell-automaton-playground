@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {ReduxState} from "./store";
 import {Dispatch} from "redux";
 import {setBoardSize, setCellSize, setStrategy} from "./actions";
-import * as strategies from "./models/strategies";
 
 export interface Props {
   cellSize: number;
@@ -35,11 +34,11 @@ export class AppComponent extends React.Component<Props> {
         <div>
           <label>Strategy</label>
           <select value={this.props.strategyName} onChange={this.props.handleChangeStrategy}>
-            {
-              Object.keys(strategies).map(name => (
-                <option key={name} value={name}>{name}</option>
-              ))
-            }
+            <option key="GameOfLifeStrategy" value="GameOfLifeStrategy">GameOfLifeStrategy</option>
+            <option key="VoteStrategy" value="VoteStrategy">VoteStrategy</option>
+            <option key="NeonStrategy" value="NeonStrategy">NeonStrategy</option>
+            <option key="DazzleStrategy" value="DazzleStrategy">DazzleStrategy</option>
+            <option key="WaveStrategy" value="WaveStrategy">WaveStrategy</option>
           </select>
         </div>
       </div>
