@@ -2,28 +2,70 @@ import * as React from "react";
 import { connect } from "react-redux";
 import {ReduxState} from "./store";
 import {Dispatch} from "redux";
-import {setCellSize} from "./actions";
+import {setBoardSize, setCellSize, setStrategy} from "./actions";
+import * as strategies from "./models/strategies";
 
 export interface Props {
   cellSize: number;
+  patternWidth: number;
+  patternHeight: number;
+  strategyName: string;
   handleChangeCellSize: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangePatternWidth: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangePatternHeight: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeStrategy: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export class AppComponent extends React.Component<Props> {
   render() {
     return (
-      <input type="number" value={this.props.cellSize} onChange={this.props.handleChangeCellSize} />
+      <div>
+        <div>
+          <label>Cell Size</label>
+          <input type="number" value={this.props.cellSize} onChange={this.props.handleChangeCellSize} />
+        </div>
+        <div>
+          <label>Pattern Width</label>
+          <input type="number" value={this.props.patternWidth} onChange={this.props.handleChangePatternWidth}/>
+        </div>
+        <div>
+          <label>Pattern Height</label>
+          <input type="number" value={this.props.patternHeight} onChange={this.props.handleChangePatternHeight}/>
+        </div>
+        <div>
+          <label>Strategy</label>
+          <select value={this.props.strategyName} onChange={this.props.handleChangeStrategy}>
+            {
+              Object.keys(strategies).map(name => (
+                <option key={name} value={name}>{name}</option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state: ReduxState) => ({
-  cellSize: state.app.cell.size
+  cellSize: state.app.cell.size,
+  patternWidth: state.app.boardSize.width,
+  patternHeight: state.app.boardSize.height,
+  strategyName: state.app.strategy.name
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   handleChangeCellSize: (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setCellSize(Number(event.target.value)));
+  },
+  handleChangePatternWidth: (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBoardSize({ width: Number(event.target.value) }))
+  },
+  handleChangePatternHeight: (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBoardSize({ height: Number(event.target.value) }))
+  },
+  handleChangeStrategy: (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setStrategy(event.target.value));
   }
 });
 

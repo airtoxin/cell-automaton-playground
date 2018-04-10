@@ -19,10 +19,10 @@ export type Neighbors = [
   ];
 
 export interface Strategy {
-  (neighbors: Neighbors): number;
+  (neighbors: Neighbors, prevNeighbors: Neighbors): number;
 }
 
-export const getNext = (cells: number[][], strategy: Strategy): number[][] => {
+const getNeighbors = (x: number, y: number, cells: number[][]): Neighbors => {
   const cellsYLength = cells.length;
   const cellsXLength = cells[0].length;
   const g = (y: number, x: number): number =>
@@ -30,19 +30,26 @@ export const getNext = (cells: number[][], strategy: Strategy): number[][] => {
       (cellsYLength + y) % cellsYLength,
       (cellsXLength + x) % cellsXLength
     ]);
+  return [
+    g(y - 1, x - 1),
+    g(y - 1, x),
+    g(y - 1, x + 1),
+    g(y, x - 1),
+    g(y, x),
+    g(y, x + 1),
+    g(y + 1, x - 1),
+    g(y + 1, x),
+    g(y + 1, x + 1)
+  ];
+};
+
+export const getNext = (cells: number[][], strategy: Strategy, prevCells: number[][]): number[][] => {
   return cells.map((row, y) =>
     row.map((_, x) => {
-      return strategy([
-        g(y - 1, x - 1),
-        g(y - 1, x),
-        g(y - 1, x + 1),
-        g(y, x - 1),
-        g(y, x),
-        g(y, x + 1),
-        g(y + 1, x - 1),
-        g(y + 1, x),
-        g(y + 1, x + 1)
-      ]);
+      return strategy(
+        getNeighbors(x, y, cells),
+        getNeighbors(x, y, prevCells)
+      );
     })
   );
 }

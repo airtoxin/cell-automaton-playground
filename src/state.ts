@@ -10,6 +10,7 @@ export interface State {
     size: number;
   };
   cells: number[][];
+  prevCells: number[][];
   strategy: Strategy;
 }
 
@@ -25,5 +26,6 @@ export const initialState: State = {
     size: 5
   },
   cells: initialize(WIDTH, HEIGHT),
-  strategy: strategies.DazzleStrategy
+  prevCells: initialize(WIDTH, HEIGHT),
+  strategy: strategies.WaveStrategy
 };

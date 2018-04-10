@@ -24,20 +24,18 @@ export const draw = (options: DrawOptions): void => {
   // Draw cells
   options.cells.forEach((row, y) =>
     row.forEach((cell, x) => {
-      if (cell) {
-        ctx.beginPath();
-        ctx.arc(
-          x * options.cellSize + options.cellSize / 2,
-          y * options.cellSize + options.cellSize / 2,
-          options.cellSize / 2,
-          0,
-          Math.PI * 2
-        );
-        ctx.strokeStyle = "rgb(0, 192, 192)";
-        ctx.stroke();
-        ctx.fillStyle = "rgba(0, 64, 64)";
-        ctx.fill();
-      }
+      ctx.beginPath();
+      ctx.arc(
+        x * options.cellSize + options.cellSize / 2,
+        y * options.cellSize + options.cellSize / 2,
+        options.cellSize / 2,
+        0,
+        Math.PI * 2
+      );
+      ctx.strokeStyle = `rgba(0, 192, 192, ${cell})`;
+      ctx.stroke();
+      ctx.fillStyle = `rgba(0, 64, 64, ${cell})`;
+      ctx.fill();
     })
   );
   // Fill up targetCanvas by cells pattern

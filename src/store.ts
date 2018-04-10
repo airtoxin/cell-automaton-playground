@@ -15,3 +15,5 @@ export const store = createStore<ReduxState>(
     app: createCirquitReducer<State>(initialState, { namespace: "app" })
   })
 );
+
+(window as any)["store"] = store;

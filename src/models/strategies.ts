@@ -37,3 +37,12 @@ export const DazzleStrategy: Strategy = neighbors => {
 
   return cnt > 4 ? 1 : 0;
 };
+
+// Cell state = 0 ~ 1
+export const WaveStrategy: Strategy = (neighbors, prevNeibors) => {
+  const avg = (count(neighbors) - getCenter(neighbors)) / 8;
+  const next = (getCenter(neighbors) + avg - getCenter(prevNeibors)) % 1;
+  if (next <= 0) return 0;
+  if (next >= 1) return 1;
+  return next;
+}
