@@ -9,7 +9,7 @@ export const setRandomBitCells = () => createAction(state => {
 export const setNextCells = () => createAction(state => {
   const prev = state.prevCells;
   state.prevCells = state.cells;
-  state.cells = getNext(state.cells, state.strategy, prev);
+  state.cells = getNext(state.cells, state.strategy.fn, prev);
 });
 
 export const setCellSize = (size: number) => createAction(state => {
@@ -22,9 +22,10 @@ export const setBoardSize = ({ width, height }: { width?: number, height?: numbe
 });
 
 export const setStrategy = (name: string) => createAction(state => {
-  if (name === "GameOfLifeStrategy") state.strategy = strategies.GameOfLifeStrategy;
-  if (name === "VoteStrategy") state.strategy = strategies.VoteStrategy;
-  if (name === "NeonStrategy") state.strategy = strategies.NeonStrategy;
-  if (name === "DazzleStrategy") state.strategy = strategies.DazzleStrategy;
-  if (name === "WaveStrategy") state.strategy = strategies.WaveStrategy;
+  state.strategy.name = name;
+  if (name === "GameOfLifeStrategy") state.strategy.fn = strategies.GameOfLifeStrategy;
+  if (name === "VoteStrategy") state.strategy.fn = strategies.VoteStrategy;
+  if (name === "NeonStrategy") state.strategy.fn = strategies.NeonStrategy;
+  if (name === "DazzleStrategy") state.strategy.fn = strategies.DazzleStrategy;
+  if (name === "WaveStrategy") state.strategy.fn = strategies.WaveStrategy;
 });

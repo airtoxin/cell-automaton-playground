@@ -11,7 +11,10 @@ export interface State {
   };
   cells: number[][];
   prevCells: number[][];
-  strategy: Strategy;
+  strategy: {
+    name: string;
+    fn: Strategy;
+  };
 }
 
 const WIDTH = 50;
@@ -27,5 +30,8 @@ export const initialState: State = {
   },
   cells: initialize(WIDTH, HEIGHT),
   prevCells: initialize(WIDTH, HEIGHT),
-  strategy: strategies.WaveStrategy
+  strategy: {
+    name: "WaveStrategy",
+    fn: strategies.WaveStrategy
+  }
 };

@@ -34,11 +34,11 @@ export class AppComponent extends React.Component<Props> {
         <div>
           <label>Strategy</label>
           <select value={this.props.strategyName} onChange={this.props.handleChangeStrategy}>
-            <option key="GameOfLifeStrategy" value="GameOfLifeStrategy">GameOfLifeStrategy</option>
-            <option key="VoteStrategy" value="VoteStrategy">VoteStrategy</option>
-            <option key="NeonStrategy" value="NeonStrategy">NeonStrategy</option>
-            <option key="DazzleStrategy" value="DazzleStrategy">DazzleStrategy</option>
-            <option key="WaveStrategy" value="WaveStrategy">WaveStrategy</option>
+            <option value="GameOfLifeStrategy">GameOfLifeStrategy</option>
+            <option value="VoteStrategy">VoteStrategy</option>
+            <option value="NeonStrategy">NeonStrategy</option>
+            <option value="DazzleStrategy">DazzleStrategy</option>
+            <option value="WaveStrategy">WaveStrategy</option>
           </select>
         </div>
       </div>
